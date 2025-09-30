@@ -33,3 +33,18 @@ const gameboard = (function() {
         markSquare
     }
 })();
+
+function square() {
+    let value = 0;
+    
+    const setSquare = function(player) {
+        value = player;
+    }
+
+    const getValue = () => value;
+
+    return {
+        setSquare,
+        getValue
+    }
+};
