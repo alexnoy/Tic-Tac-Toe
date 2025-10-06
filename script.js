@@ -48,3 +48,39 @@ function square() {
         getValue
     }
 };
+
+const gameFlow = (function() {
+    const players = [
+        {
+            name: 'Player 1',
+            symbol: 1
+        },
+        {
+            name: 'Player 2',
+            symbol: 2
+        }
+    ]
+
+    let activePlayer = players[0];
+
+    const getActivePlayer = () => activePlayer;
+
+    const switchActivePlayer = function() {
+        if (activePlayer === players[0]) {
+            activePlayer = players[1];
+        } else {
+            activePlayer = players[0];
+        }
+    }
+
+    const newRound = function() {
+        gameboard.showBoard();
+        console.log(`It is ${activePlayer.name}'s turn...`)
+    }
+
+    newRound();
+
+    return{
+        getActivePlayer,
+    }
+})();
