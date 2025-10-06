@@ -78,9 +78,26 @@ const gameFlow = (function() {
         console.log(`It is ${activePlayer.name}'s turn...`)
     }
 
+    const playGame = function(row, column) {
+        console.log(`${activePlayer.name} is marking the square at (${row},${column})`);
+
+        if (gameboard.markSquare(row, column, activePlayer.symbol) !== 'invalid') {
+            const result = gameboard.checkForWinner(activePlayer.symbol);
+
+            if (result === 'Win') {
+                gameboard.showBoard();
+                console.log('Game Over,',`${activePlayer.name} is the winner!!!`);
+            } else {
+                switchActivePlayer();
+                newRound();
+            }
+        }
+    }
+
     newRound();
 
     return{
         getActivePlayer,
+        playGame
     }
 })();
