@@ -14,23 +14,48 @@ const gameboard = (function() {
         const selectedSquare = board[row][column];
 
         if (selectedSquare.getValue() !== 0) {
-            console.log(new Error('Invalid input select another square'));
+            console.log('Invalid input please select a different square');
+            return 'invalid';
         } else {
             selectedSquare.setSquare(player)
         }
-
-        showBoard();
     }
 
-    const showBoard = () => {
-        const boardValues =  board.map((row) => row.map((square) => square.getValue()))
-        console.table(boardValues);
+    const boardValues = () => board.map((row) => row.map((square) => square.getValue()));
+
+    const showBoard = () => console.table(boardValues());
+
+    const checkForWinner = function(playerSymbol) {
+        const boardValue = boardValues();
+
+        const winningCoords = [
+            [boardValue[0][0],boardValue[1][0],boardValue[2][0]],
+
+            [boardValue[0][1],boardValue[1][1],boardValue[2][1]],
+
+            [boardValue[0][2],boardValue[1][2],boardValue[2][2]],
+
+            [boardValue[0][0],boardValue[1][1],boardValue[2][2]],
+
+            [boardValue[0][2],boardValue[1][1],boardValue[2][0]],
+
+            [boardValue[0][0],boardValue[0][1],boardValue[0][2]],
+
+            [boardValue[1][0],boardValue[1][1],boardValue[1][2]],
+
+            [boardValue[2][0],boardValue[2][1],boardValue[2][2]]
+        ];
+        
+        if (winningCoords.some((coordSet) => coordSet.every((coordinate) => coordinate === playerSymbol))) {
+            return 'Win';
+        }
     }
 
     return {
         getBoard,
         showBoard,
-        markSquare
+        markSquare,
+        checkForWinner
     }
 })();
 
