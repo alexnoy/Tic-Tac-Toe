@@ -48,6 +48,9 @@ const gameboard = (function() {
         
         if (winningCoords.some((coordSet) => coordSet.every((coordinate) => coordinate === playerSymbol))) {
             return 'Win';
+        }  
+        else if (winningCoords.every((coordSet) => coordSet.every((coordinate) => coordinate !== 0))) {
+            return 'Tie';
         }
     }
 
@@ -112,6 +115,9 @@ const gameFlow = (function() {
             if (result === 'Win') {
                 gameboard.showBoard();
                 console.log('Game Over,',`${activePlayer.name} is the winner!!!`);
+            } else if (result === 'Tie') {
+                gameboard.showBoard();
+                console.log('Game Over, no moves left to play, tie game.')
             } else {
                 switchActivePlayer();
                 newRound();
