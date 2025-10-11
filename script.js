@@ -149,5 +149,14 @@ const displayController = (function() {
         }))
     }
 
+    const buttonClickHandler = function(event) {
+        const row = event.target.dataset.row;
+        const column = event.target.dataset.column;
+
+        gameFlow.playGame(row, column);
+        updateBoardDisplay();
+    }
+    boardDisplay.addEventListener('click', buttonClickHandler);
+
     updateBoardDisplay();
 })();
