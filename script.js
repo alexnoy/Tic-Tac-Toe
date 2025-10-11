@@ -132,3 +132,22 @@ const gameFlow = (function() {
         playGame
     }
 })();
+
+const displayController = (function() {
+    const board = gameboard.getBoard();
+    const boardDisplay = document.querySelector('.board');
+
+    const updateBoardDisplay = function() {
+        boardDisplay.textContent = '';
+        board.forEach((row, rowIndex) => row.forEach((square, squareIndex) => {
+            const boardButton = document.createElement('button');
+            boardButton.classList.add('square');
+            boardButton.dataset.row = rowIndex;
+            boardButton.dataset.column = squareIndex;
+            boardButton.textContent = square.getValue();
+            boardDisplay.append(boardButton);
+        }))
+    }
+
+    updateBoardDisplay();
+})();
