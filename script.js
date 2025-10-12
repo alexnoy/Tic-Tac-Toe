@@ -1,4 +1,19 @@
 const gameboard = (function() {
+    function square() {
+        let value = 0;
+        
+        const setSquare = function(player) {
+            value = player;
+        }
+
+        const getValue = () => value;
+
+        return {
+            setSquare,
+            getValue
+        }
+    };
+    
     const board = [];
 
     for (let i = 0; i < 3; i++) {
@@ -61,21 +76,6 @@ const gameboard = (function() {
         checkForWinner
     }
 })();
-
-function square() {
-    let value = 0;
-    
-    const setSquare = function(player) {
-        value = player;
-    }
-
-    const getValue = () => value;
-
-    return {
-        setSquare,
-        getValue
-    }
-};
 
 const gameFlow = (function() {
     const players = [
