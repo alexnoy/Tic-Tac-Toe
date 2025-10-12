@@ -112,12 +112,8 @@ const gameFlow = (function() {
         if (gameboard.markSquare(row, column, activePlayer.symbol) !== 'invalid') {
             const result = gameboard.checkForWinner(activePlayer.symbol);
 
-            if (result === 'Win') {
-                gameboard.showBoard();
-                console.log('Game Over,',`${activePlayer.name} is the winner!!!`);
-            } else if (result === 'Tie') {
-                gameboard.showBoard();
-                console.log('Game Over, no moves left to play, tie game.')
+            if (result === 'Win' || result === 'Tie') {
+                return result;
             } else {
                 switchActivePlayer();
                 newRound();
@@ -149,14 +145,33 @@ const displayController = (function() {
         }))
     }
 
+    const displayGameState = function(result) {
+        const gameStateDiv = document.querySelector('.gameState');
+
+        if (result === 'Win') {
+            gameStateDiv.textContent = `Game Over, ${gameFlow.getActivePlayer().name} is the winner!!!`;
+        } else if (result === 'Tie') {
+            gameStateDiv.textContent = 'Game Over, no moves left to play. Tie game.';
+        } else {
+            gameStateDiv.textContent = `${gameFlow.getActivePlayer().name}'s turn.`;
+        }
+    }
+
     const buttonClickHandler = function(event) {
         const row = event.target.dataset.row;
         const column = event.target.dataset.column;
 
-        gameFlow.playGame(row, column);
+        const result = gameFlow.playGame(row, column);
+
+        if (result === 'Win' || result === 'Tie') {
+            boardDisplay.removeEventListener('click', buttonClickHandler);
+        }
+
         updateBoardDisplay();
+        displayGameState(result);
     }
     boardDisplay.addEventListener('click', buttonClickHandler);
 
     updateBoardDisplay();
+    displayGameState();
 })();
