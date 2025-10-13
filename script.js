@@ -161,6 +161,10 @@ const displayController = (function() {
         const row = event.target.dataset.row;
         const column = event.target.dataset.column;
 
+        if (row === undefined) {
+            return;
+        }
+
         const result = gameFlow.playGame(row, column);
 
         if (result === 'Win' || result === 'Tie') {
