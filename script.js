@@ -172,7 +172,17 @@ const displayController = (function() {
     }
     boardDisplay.addEventListener('click', boardClickHandler);
 
-    const restartButton = document.querySelector('.restart');
+    const startScreen = document.querySelector('.startScreen');
+    const boardContainer = document.querySelector('.boardContainer');
+    const startButton = document.querySelector('.startButton');
+
+    const startHandler = function() {
+        boardContainer.style.display = 'flex';
+        startScreen.style.display = 'none';
+    }
+    startButton.addEventListener('click', startHandler);
+
+    const restartButton = document.querySelector('.restartButton');
 
     const restartHandler = function() {
         board.forEach((row) => row.forEach((square) => square.setSquare(0)));
