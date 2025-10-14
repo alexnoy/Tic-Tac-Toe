@@ -1,0 +1,44 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.boardContainer, .startScreen {
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.startScreen {
+    display: flex;
+}
+
+.boardContainer {
+    display: none;
+}
+
+.board {
+    display: grid;
+    height: 500px;
+    aspect-ratio: 1 / 1;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+}
+
+.square {
+    border: none;
+    outline: 1px solid black;
+    height: calc(500px / 3);
+    aspect-ratio: 1 / 1;
+}
+
+.gameResults {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
