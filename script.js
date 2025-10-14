@@ -29,7 +29,6 @@ const gameboard = (function() {
         const selectedSquare = board[row][column];
 
         if (selectedSquare.getValue() !== 0) {
-            console.log('Invalid input please select a different square');
             return 'invalid';
         } else {
             selectedSquare.setSquare(player)
@@ -71,7 +70,6 @@ const gameboard = (function() {
 
     return {
         getBoard,
-        showBoard,
         markSquare,
         checkForWinner
     }
@@ -109,8 +107,6 @@ const gameFlow = (function() {
     }
 
     const playGame = function(row, column) {
-        console.log(`${activePlayer.name} is marking the square at (${row},${column})`);
-
         if (gameboard.markSquare(row, column, activePlayer.symbol) !== 'invalid') {
             const result = gameboard.checkForWinner(activePlayer.symbol);
 
@@ -118,12 +114,9 @@ const gameFlow = (function() {
                 return result;
             } else {
                 switchActivePlayer();
-                newRound();
             }
         }
     }
-
-    newRound();
 
     return{
         getActivePlayer,
