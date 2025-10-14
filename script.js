@@ -101,6 +101,8 @@ const gameFlow = (function() {
         }
     }
 
+    const resetActivePlayer = () => activePlayer = players[0];
+
     const newRound = function() {
         gameboard.showBoard();
         console.log(`It is ${activePlayer.name}'s turn...`)
@@ -125,7 +127,8 @@ const gameFlow = (function() {
 
     return{
         getActivePlayer,
-        playGame
+        playGame,
+        resetActivePlayer
     }
 })();
 
@@ -157,7 +160,7 @@ const displayController = (function() {
         }
     }
 
-    const buttonClickHandler = function(event) {
+    const boardClickHandler = function(event) {
         const row = event.target.dataset.row;
         const column = event.target.dataset.column;
 
@@ -168,13 +171,24 @@ const displayController = (function() {
         const result = gameFlow.playGame(row, column);
 
         if (result === 'Win' || result === 'Tie') {
-            boardDisplay.removeEventListener('click', buttonClickHandler);
+            boardDisplay.removeEventListener('click', boardClickHandler);
         }
 
         updateBoardDisplay();
         displayGameState(result);
     }
-    boardDisplay.addEventListener('click', buttonClickHandler);
+    boardDisplay.addEventListener('click', boardClickHandler);
+
+    const restartButton = document.querySelector('.restart');
+
+    const restartHandler = function() {
+        board.forEach((row) => row.forEach((square) => square.setSquare(0)));
+        gameFlow.resetActivePlayer();
+        boardDisplay.addEventListener('click', boardClickHandler);
+        updateBoardDisplay();
+        displayGameState();
+    }
+    restartButton.addEventListener('click', restartHandler);
 
     updateBoardDisplay();
     displayGameState();
