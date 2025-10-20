@@ -87,6 +87,17 @@ const gameFlow = (function() {
         }
     ]
 
+    const setPlayerName = function(name1, name2) {
+        if (name1 !== '' && name2 === '') {
+            players[0].name = name1;
+        } else if (name2 !== '' && name1 === '') {
+            players[1].name = name2;
+        } else if(name1 !== '' && name2 !== '') {
+            players[0].name = name1;
+            players[1].name = name2;
+        }
+    }
+
     let activePlayer = players[0];
 
     const getActivePlayer = () => activePlayer;
@@ -121,7 +132,8 @@ const gameFlow = (function() {
     return{
         getActivePlayer,
         playGame,
-        resetActivePlayer
+        resetActivePlayer,
+        setPlayerName
     }
 })();
 
@@ -175,8 +187,11 @@ const displayController = (function() {
     const startScreen = document.querySelector('.startScreen');
     const boardContainer = document.querySelector('.boardContainer');
     const startButton = document.querySelector('.startButton');
+    const player1Name = document.querySelector('#player1Name');
+    const player2Name = document.querySelector('#player2Name');
 
     const startHandler = function() {
+        gameFlow.setPlayerName(player1Name.value, player2Name.value);
         boardContainer.style.display = 'flex';
         startScreen.style.display = 'none';
     }
