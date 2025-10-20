@@ -194,6 +194,8 @@ const displayController = (function() {
         gameFlow.setPlayerName(player1Name.value, player2Name.value);
         boardContainer.style.display = 'flex';
         startScreen.style.display = 'none';
+        updateBoardDisplay();
+        displayGameState();
     }
     startButton.addEventListener('click', startHandler);
 
@@ -207,7 +209,4 @@ const displayController = (function() {
         displayGameState();
     }
     restartButton.addEventListener('click', restartHandler);
-
-    updateBoardDisplay();
-    displayGameState();
 })();
