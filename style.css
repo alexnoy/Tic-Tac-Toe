@@ -11,10 +11,34 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 25px;
 }
 
 .startScreen {
     display: flex;
+}
+
+.playerNames {
+    font-weight: bold;
+    color: darkslateblue;
+    font-size: 1.25rem;
+}
+
+input[type='text'] {
+    border: 1px solid darkslateblue;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.startButton, .restartButton, .gameState {
+    font-size: 1.25rem;
+    height: 40px;
+    aspect-ratio: 5 / 1;
+    border: none;
+    background-color: darkslateblue;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
 }
 
 .boardContainer {
@@ -32,13 +56,21 @@
 }
 
 .square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: none;
-    outline: 1px solid black;
+    outline: 2px solid darkslateblue;
     height: calc(500px / 3);
     aspect-ratio: 1 / 1;
+    font-size: 10rem;
+    background-color: rgb(222, 217, 248);
+    color: darkslateblue;
 }
 
-.gameResults {
-    font-size: 1.25rem;
-    font-weight: bold;
+.gameState {
+    height: initial;
+    aspect-ratio: 0;
+    background-color: white;
+    color: darkslateblue;
 }
