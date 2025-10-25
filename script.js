@@ -79,11 +79,11 @@ const gameFlow = (function() {
     const players = [
         {
             name: 'Player 1',
-            symbol: 1
+            symbol: 'X'
         },
         {
             name: 'Player 2',
-            symbol: 2
+            symbol: 'O'
         }
     ]
 
@@ -148,7 +148,11 @@ const displayController = (function() {
             boardButton.classList.add('square');
             boardButton.dataset.row = rowIndex;
             boardButton.dataset.column = squareIndex;
-            boardButton.textContent = square.getValue();
+
+            if (square.getValue() !== 0) {
+                boardButton.textContent = square.getValue();
+            }
+
             boardDisplay.append(boardButton);
         }))
     }
